@@ -247,6 +247,9 @@ function generateAuthors (){
 
     for(let article of articles){
 
+        /* find authors wrapper */
+
+        const authorsWrapper = article.querySelector(optArticleAuthorSelector);
 
         /* make html variable with empty string */
 
@@ -254,7 +257,7 @@ function generateAuthors (){
 
         /* get author from the attribute */
 
-        const articleAuthor = article.querySelector(optArticleAuthorSelector).innerHTML;
+        const articleAuthor = article.getAttribute('data-author');
         
 
         console.log('articleAuthor', articleAuthor);
@@ -270,13 +273,11 @@ function generateAuthors (){
 
         /* insert HTML of all the links into the tags wrapper */
 
-        articleAuthor.innerHTML = html;
+        authorsWrapper.innerHTML = html;
         
     }
 
-
 }
-
 
 generateAuthors();
 
