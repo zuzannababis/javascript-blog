@@ -60,7 +60,7 @@ const optArticleSelector = '.post',
     optTitleListSelector = '.titles',
     optArticleTagsSelector = '.post-tags .list',
     optArticleAuthorSelector = '.post-author',
-    optSingleTagSelector = '.post-tags a',
+    optSingleTagSelector = 'a[href^="#tag-"]',
     optTagsListSelector = '.tags .list',
     optCloudClassCount = 5,
     optCloudClassPrefix = 'tag-size-',
@@ -297,7 +297,7 @@ function addClickListenersToTags(){
     
     /* find all links to tags */
   
-    const links = document.querySelectorAll('a[href^="#tag-"]');
+    const links = document.querySelectorAll(optSingleTagSelector);
 
     /* START LOOP: for each link */
 
