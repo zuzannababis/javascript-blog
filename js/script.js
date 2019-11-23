@@ -297,7 +297,7 @@ function addClickListenersToTags(){
     
     /* find all links to tags */
   
-    const links = document.querySelectorAll(optSingleTagSelector);
+    const links = document.querySelectorAll('a[href^="#tag-"]');
 
     /* START LOOP: for each link */
 
@@ -402,7 +402,7 @@ function generateAuthors (){
         const authorsList = document.querySelector('.authors');
 
         const authorsParams = calculateAuthorsParams(allAuthors);
-        
+
         /* [NEW] create variable for all links HTML code */
 
         let allAuthorsHTML = '';
