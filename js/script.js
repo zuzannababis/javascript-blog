@@ -335,32 +335,6 @@ function addClickListenersToTags(){
 
 addClickListenersToTags();
 
-function calculateAuthorsParams(authors){
-  const params = {
-    max: 0,
-    min: 99999,
-  };
-  for(let author in authors){
-    console.log(author + 'is used' + authors[author] + 'times');
-    if(authors[author] > params.max){
-      params.max = authors[author];
-    }
-    if(authors[author] < params.min){
-      params.min = authors[author];
-    }
-  }
-  return params;
-}
-
-function calculateAuthorClass (count, params){
-  const normalizedCount = count - params.min;
-  const normalizedMax = params.max - params.min;
-  const percentage = normalizedCount / normalizedMax;
-  const classNumber = Math.floor( percentage * (optCloudClassCount - 1) + 1 );
-  const cloudClass = optCloudClassPrefix + classNumber;
-
-  return cloudClass;
-}
 
 function generateAuthors (){
 
@@ -386,16 +360,16 @@ function generateAuthors (){
 
         /* get author from the attribute */
 
-        const articleAuthor = article.getAttribute('data-author');
+        const author = article.getAttribute('data-author');
         
 
-        console.log('articleAuthor', articleAuthor);
+        console.log('articleAuthor', author);
 
         /* generate HTML of the link */
 
         //const authorHTML = '<li><a href="#author-' + articleAuthor + '"><span>' + articleAuthor + '</span></a></li>';
 
-        const authorHTMLData = {id: articleAuthor, title: articleAuthor};
+        const authorHTMLData = {id: author, title: author};
         const authorHTML = templates.authorLink(authorHTMLData);
 
         /* add generated code to html variable */
@@ -405,15 +379,15 @@ function generateAuthors (){
 
         /* [NEW] check if this link is NOT already in allTags */
       
-        if(!allAuthors.hasOwnProperty(articleAuthor)){
+        if(!allAuthors.hasOwnProperty(author)){
 
           /* [NEW] add authors to allAuthors object */
 
-          allAuthors[articleAuthor] = 1;
+          allAuthors[author] = 1;
 
          } else {
 
-            allAuthors[articleAuthor]++;
+            allAuthors[author]++;
 
           }
 
@@ -426,7 +400,7 @@ function generateAuthors (){
   
         const authorsList = document.querySelector('.authors');
 
-        const authorsParams = calculateAuthorsParams(allAuthors);
+        
 
         /* [NEW] create variable for all links HTML code */
 
@@ -437,12 +411,12 @@ function generateAuthors (){
 
         for(let author in allAuthors){
           /* NEW generate code of a link and add it to allAuthorsHTML */
-
+          
           //allAuthorsHTML += '<li><a class="' + calculateAuthorClass(allAuthors[articleAuthor], authorsParams) + '"href="#author-' + articleAuthor + '">' + articleAuthor + '' + '</a></li>'; 
           allAuthorsData.authors.push({
             author: author,
-            count: allAuthors[author],
-            className: calculateAuthorClass(allAuthors[author], authorsParams)
+            count: allAuthors[author], 
+            /* className: calculateAuthorClass(allAuthors[author], authorsParams) */
           });
           console.log(allAuthorsData,'authorsdata');
         }
